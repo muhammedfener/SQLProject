@@ -20,7 +20,7 @@ namespace SQLProject
         Dictionary<int, string> RenkListesi = new Dictionary<int, string>();
         Dictionary<int, string> EhliyetListesi = new Dictionary<int, string>();
         Dictionary<int, string> VitesTipleri = new Dictionary<int, string>();
-
+        int baglantiIstekSayisi = 0;
         public Form2()
         {
             InitializeComponent();
@@ -33,6 +33,17 @@ namespace SQLProject
             RenkDoldur();
             EhliyetDoldur();
             VitesDoldur();
+        }
+
+        private void BaglantiSayac()
+        {
+            baglantiIstekSayisi += 1;
+            if(baglantiIstekSayisi > 50)
+            {
+                con.Close();
+                ConnectionCreate();
+                baglantiIstekSayisi = 0;
+            }
         }
 
         private void ConnectionCreate()
@@ -100,12 +111,14 @@ namespace SQLProject
             cmbModeller.DisplayMember = "Value";
 
             Modeller.Close();
+
         }
 
         private void EhliyetDoldur()
         {
             SqlCommand com = new SqlCommand("SELECT EhliyetID,EhliyetAd FROM Ehliyetler WHERE EhliyetAktifMi = 1", con);
             SqlDataReader Ehliyetler = com.ExecuteReader();
+            com.
             while (Ehliyetler.Read())
             {
                 EhliyetListesi.Add((int)Ehliyetler[0], (string)Ehliyetler[1]);
