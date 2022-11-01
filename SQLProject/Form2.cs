@@ -21,6 +21,7 @@ namespace SQLProject
         Dictionary<int, string> EhliyetListesi = new Dictionary<int, string>();
         Dictionary<int, string> VitesTipleri = new Dictionary<int, string>();
         int baglantiIstekSayisi = 0;
+
         public Form2()
         {
             InitializeComponent();
@@ -118,7 +119,7 @@ namespace SQLProject
         {
             SqlCommand com = new SqlCommand("SELECT EhliyetID,EhliyetAd FROM Ehliyetler WHERE EhliyetAktifMi = 1", con);
             SqlDataReader Ehliyetler = com.ExecuteReader();
-            com.
+
             while (Ehliyetler.Read())
             {
                 EhliyetListesi.Add((int)Ehliyetler[0], (string)Ehliyetler[1]);
